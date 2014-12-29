@@ -31,7 +31,9 @@ package { 'emacs':
 
 # atom manually
 
-package { 'squidclient':
+
+# gpg things
+package { 'dconf-editor':
   ensure => 'installed',
 }
 
@@ -63,6 +65,9 @@ if hiera('run_squid', false) {
   class { 'iptables':
     config => 'file', # This is needed to activate file mode
     source => [ "puppet:///modules/local_config_files/etc/iptables.docker_squid"],
+  }
+  package { 'squidclient':
+    ensure => 'installed',
   }
 }
 else {
