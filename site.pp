@@ -16,6 +16,15 @@ package { 'bzr':
 package { 'git':
   ensure => 'installed',
 }
+
+package { 'qgit':
+  ensure => 'installed',
+}
+
+package { 'meld':
+  ensure => 'installed',
+}
+
 package { 'mercurial':
   ensure => 'installed',
 }
