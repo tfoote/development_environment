@@ -46,6 +46,26 @@ package { 'dconf-editor':
   ensure => 'installed',
 }
 
+# Python Tools
+package { 'ipython':
+  ensure => 'installed',
+}
+
+package { 'pep8':
+  ensure => 'installed',
+}
+
+package { 'python3-pep8':
+  ensure => 'installed',
+}
+
+package { 'python-flake8':
+  ensure => 'installed',
+}
+
+package { 'python3-flake8':
+  ensure => 'installed',
+}
 
 # Squid-in-a-can
 if hiera('run_squid', false) {
