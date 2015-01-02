@@ -67,6 +67,24 @@ package { 'python3-flake8':
   ensure => 'installed',
 }
 
+# Sysadmin tools:
+
+package { 'sysstat':
+  ensure => 'installed',
+}
+
+package { 'vnstat':
+  ensure => 'installed',
+}
+
+## Video processing tools
+
+package { 'mencoder':
+  ensure => 'installed',
+}
+
+
+
 # Squid-in-a-can
 if hiera('run_squid', false) {
   docker::image {'jpetazzo/squid-in-a-can':
