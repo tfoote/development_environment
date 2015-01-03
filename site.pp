@@ -83,6 +83,26 @@ package { 'mencoder':
   ensure => 'installed',
 }
 
+package { 'kdenlive':
+  ensure => 'installed',
+}
+
+package { 'vlc':
+  ensure => 'installed',
+}
+
+
+# Needed for rosdistro tests
+
+package { 'python-pip':
+  ensure => 'installed',
+}
+
+pip::install { 'unidiff':
+  python_version => '2',    # defaults to 2.7
+  require => Package['python-pip'],
+}
+
 
 
 # Squid-in-a-can
