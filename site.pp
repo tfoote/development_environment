@@ -38,6 +38,10 @@ package { 'emacs':
   ensure => 'installed',
 }
 
+package { 'pdftk':
+ensure => 'installed',
+}
+
 # atom manually
 
 
@@ -101,6 +105,12 @@ package { 'python-pip':
 pip::install { 'unidiff':
   python_version => '2',    # defaults to 2.7
   require => Package['python-pip'],
+}
+
+
+# ifc6410
+package { 'android-tools-fastboot':
+ensure => 'installed',
 }
 
 
