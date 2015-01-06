@@ -187,3 +187,46 @@ else {
     ensure => absent,
   }
 }
+
+
+# Basic ROS configuration
+# TODO better parameterization
+# potential parameters:
+#  testing vs main
+#  python3
+
+
+apt::source { 'ros-latest':
+  location   => 'http://packages.ros.org/ros/ubuntu',
+  #release    => 'stable',
+  repos      => 'main',
+  key        => 'B01FA116',
+  key_source => 'https://raw.githubusercontent.com/ros/rosdistro/master/ros.key',
+}
+
+package { 'ros-indigo-ros-base':
+  ensure => 'installed',
+  require => Apt::Source ['ros-latest'],
+}
+
+package { 'python-rosdep':
+  ensure => 'installed',
+  require => Apt::Source ['ros-latest'],
+}
+
+package { 'python-rosinstall':
+  ensure => 'installed',
+  require => Apt::Source ['ros-latest'],
+}
+
+package { 'python-rosdistro':
+  ensure => 'latest',
+  require => Apt::Source ['ros-latest'],
+}
+
+exec {'rosdep-init':
+  command    => '/usr/bin/rosdep init',
+  user       => 'root',
+  creates    => '/etc/ros/rosdep/sources.list.d/20-default.list',
+  require    => Package['python-rosdep'],
+}
