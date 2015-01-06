@@ -1,1 +1,8 @@
 *~
+
+
+.librarian
+.tmp
+Puppetfile.lock
+modules
+vendor
