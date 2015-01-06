@@ -113,6 +113,19 @@ package { 'android-tools-fastboot':
 ensure => 'installed',
 }
 
+# Google Chrome
+apt::source { 'google-chrome-stable':
+  location   => 'http://dl.google.com/linux/chrome/deb/',
+  release    => 'stable',
+  repos      => 'main',
+  key        => '7FAC5991',
+  include_src => false,
+}
+package { 'google-chrome-stable':
+  ensure => 'installed',
+  require => Apt::Source ['google-chrome-stable'],
+}
+
 
 
 # Squid-in-a-can
