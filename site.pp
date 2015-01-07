@@ -95,6 +95,21 @@ package { 'vlc':
   ensure => 'installed',
 }
 
+# latex tools
+package { 'texlive-latex-extra':
+  ensure => 'installed',
+}
+
+# latex tools
+package { 'texlive-fonts-recommended':
+  ensure => 'installed',
+}
+
+package { 'latex-beamer':
+  ensure => 'installed',
+}
+
+
 
 # Needed for rosdistro tests
 
