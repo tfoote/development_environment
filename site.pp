@@ -81,6 +81,10 @@ package { 'vnstat':
   ensure => 'installed',
 }
 
+package { 'nmap':
+  ensure => 'installed',
+}
+
 ## Video processing tools
 
 package { 'mencoder':
