@@ -8,6 +8,11 @@ class {'docker':
   manage_kernel => false,
 }
 
+pip::install { 'fig':
+  python_version => '2',    # defaults to 2.7
+  require => Package['python-pip'],
+}
+
 
 # Standard vcs tools
 package { 'bzr':
