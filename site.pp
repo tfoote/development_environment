@@ -38,6 +38,10 @@ package { 'emacs':
   ensure => 'installed',
 }
 
+package { 'byobu':
+  ensure => 'installed',
+}
+
 package { 'pdftk':
 ensure => 'installed',
 }
