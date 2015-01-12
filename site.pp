@@ -135,6 +135,16 @@ pip::install { 'unidiff':
   require => Package['python-pip'],
 }
 
+# buildfarm deployment
+
+package { 'python3-pip':
+  ensure => 'installed',
+}
+
+package { 'python3-all':
+  ensure => 'installed',
+}
+
 
 # ifc6410
 package { 'android-tools-fastboot':
