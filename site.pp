@@ -137,6 +137,10 @@ pip::install { 'unidiff':
 
 # buildfarm deployment
 
+package { 'curl':
+  ensure => 'installed',
+}
+
 package { 'python3-pip':
   ensure => 'installed',
 }
@@ -148,8 +152,25 @@ package { 'python3-all':
 
 # ifc6410
 package { 'android-tools-fastboot':
-ensure => 'installed',
+  ensure => 'installed',
 }
+
+# Pandora
+
+apt::source { 'pithos-ppa':
+  location   => 'http://ppa.launchpad.net/pithos/ppa/ubuntu',
+  #release    => 'stable',
+  repos      => 'main',
+  key        => '5C8B1281',
+  #include_src => false,
+}
+
+package { 'pithos':
+  ensure => 'installed',
+  require => Apt::Source['pithos-ppa'],
+}
+
+
 
 # Google Chrome
 apt::source { 'google-chrome-stable':
