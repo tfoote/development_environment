@@ -17,3 +17,4 @@ This is a repo to help me maintain my development environment and reproduce it o
  * Skype
  * Google Talk plugin
  * Adobe Flash Plugin: http://ubuntuhandbook.org/index.php/2014/04/install-adobe-flash-in-ubuntu-14-04-lts/
+ * fix Ubuntu: https://fixubuntu.com/

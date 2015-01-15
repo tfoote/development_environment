@@ -54,6 +54,12 @@ ensure => 'installed',
 # atom manually
 
 
+#rst renderer needed for atom-rst-preview
+package { 'pandoc':
+  ensure => 'installed',
+}
+
+
 # gpg things
 package { 'dconf-editor':
   ensure => 'installed',
@@ -81,6 +87,10 @@ package { 'python3-flake8':
 }
 
 # Sysadmin tools:
+
+package { 'clusterssh':
+  ensure => 'installed',
+}
 
 package { 'sysstat':
   ensure => 'installed',
