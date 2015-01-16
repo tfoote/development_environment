@@ -165,6 +165,12 @@ package { 'android-tools-fastboot':
   ensure => 'installed',
 }
 
+# android
+package { 'android-tools-adb':
+  ensure => 'installed',
+}
+
+
 # Pandora
 
 apt::source { 'pithos-ppa':
