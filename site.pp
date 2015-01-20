@@ -60,6 +60,15 @@ package { 'pandoc':
 }
 
 
+# Wine
+package { 'wine':
+  ensure => 'installed',
+}
+
+package { 'winetricks':
+  ensure => 'installed',
+}
+
 # gpg things
 package { 'dconf-editor':
   ensure => 'installed',
