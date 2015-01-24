@@ -59,6 +59,23 @@ package { 'pandoc':
   ensure => 'installed',
 }
 
+#gitbook
+package { 'nodejs':
+  ensure => 'installed',
+}
+
+package { 'npm':
+  ensure => 'installed',
+}
+
+# TODO gitbook npm module
+
+
+# steam
+package { 'steam':
+  ensure => 'installed',
+}
+
 
 # Wine
 package { 'wine':
