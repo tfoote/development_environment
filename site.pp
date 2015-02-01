@@ -53,9 +53,16 @@ ensure => 'installed',
 
 # atom manually
 
-
 #rst renderer needed for atom-rst-preview
 package { 'pandoc':
+  ensure => 'installed',
+}
+
+# autoconf automake etc
+package { 'autoconf':
+  ensure => 'installed',
+}
+package { 'automake':
   ensure => 'installed',
 }
 
@@ -162,9 +169,10 @@ package { 'latex-beamer':
 
 # Needed for rosdistro tests
 
-package { 'python-pip':
-  ensure => 'installed',
-}
+## declared below in ros_release_python section
+#package { 'python-pip':
+#  ensure => 'installed',
+#}
 
 pip::install { 'unidiff':
   python_version => '2',    # defaults to 2.7
@@ -177,13 +185,14 @@ package { 'curl':
   ensure => 'installed',
 }
 
-package { 'python3-pip':
-  ensure => 'installed',
-}
-
-package { 'python3-all':
-  ensure => 'installed',
-}
+## declared below in ros_release_python section
+#package { 'python3-pip':
+#  ensure => 'installed',
+#}
+## declared below in ros_release_python section
+#package { 'python3-all':
+#  ensure => 'installed',
+#}
 
 
 # ifc6410
@@ -331,3 +340,42 @@ exec {'rosdep-init':
   creates    => '/etc/ros/rosdep/sources.list.d/20-default.list',
   require    => Package['python-rosdep'],
 }
+
+
+## ros_release_python
+
+package { 'dput':
+  ensure => 'latest',
+}
+
+package { 'apt-file':
+  ensure => 'latest',
+}
+
+package { 'python-setuptools':
+  ensure => 'latest',
+}
+
+package { 'python3-setuptools':
+  ensure => 'latest',
+}
+
+package { 'python-all':
+  ensure => 'latest',
+}
+
+package { 'python3-all':
+  ensure => 'latest',
+}
+
+package { 'python-pip':
+  ensure => 'latest',
+}
+
+package { 'python3-pip':
+  ensure => 'latest',
+}
+
+## TODO
+# apt-file update
+# install stdeb from git branch
