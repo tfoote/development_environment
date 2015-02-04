@@ -5,6 +5,10 @@ include '::ntp'
 
 # Latest docker
 class {'docker':
+  # skydock/skydns support
+  extra_parameters => '--bip=172.17.42.1/16',
+  dns => ['172.17.42.1', '8.8.8.8', '8.8.4.4'],
+  dns_search => ['dev.docker'],
   manage_kernel => false,
 }
 
