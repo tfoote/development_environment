@@ -70,6 +70,11 @@ package { 'automake':
   ensure => 'installed',
 }
 
+# image processing
+package { 'gimp':
+  ensure => 'installed',
+}
+
 #gitbook
 package { 'nodejs':
   ensure => 'installed',
