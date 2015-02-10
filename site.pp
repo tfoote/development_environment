@@ -62,6 +62,19 @@ package { 'pandoc':
   ensure => 'installed',
 }
 
+# android studio
+
+package { 'default-jdk':
+  ensure => 'installed',
+} ->
+class { 'android': }
+android::build_tools { 'build-tools-19.0.1': }
+android::platform { 'android-3': }
+
+package { 'ant':
+  ensure => 'installed',
+}
+
 # autoconf automake etc
 package { 'autoconf':
   ensure => 'installed',
