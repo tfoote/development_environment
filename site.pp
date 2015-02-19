@@ -151,6 +151,14 @@ package { 'sysstat':
   ensure => 'installed',
 }
 
+package { 'iftop':
+  ensure => 'installed',
+}
+
+package { 'nethogs':
+  ensure => 'installed',
+}
+
 package { 'vnstat':
   ensure => 'installed',
 }
