@@ -141,6 +141,13 @@ package { 'python3-flake8':
   ensure => 'installed',
 }
 
+## SSH server 
+
+package { 'openssh-server':
+  ensure => 'installed',
+}
+
+
 # Sysadmin tools:
 
 package { 'clusterssh':
