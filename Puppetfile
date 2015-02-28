@@ -4,6 +4,6 @@ mod 'garethr-docker'
 mod 'maestrodev-android'
 mod 'puppetlabs-ntp'
 mod 'saz-timezone'
+mod 'tfoote-ros'
 mod 'tracywebtech-pip'
 mod 'example42-iptables'
-
