@@ -55,12 +55,32 @@ package { 'pdftk':
 ensure => 'installed',
 }
 
-# atom manually
 
-#rst renderer needed for atom-rst-preview
-package { 'pandoc':
-  ensure => 'installed',
+class tully_linter_requirements {
+
+  # atom manually
+
+  #rst renderer needed for atom-rst-preview
+  package { 'clang':
+    ensure => 'installed',
+  }
+
+  #rst renderer needed for atom-rst-preview
+  package { 'pandoc':
+    ensure => 'installed',
+  }
+
+  package { 'pylint':
+    ensure => 'installed',
+  }
+
+  package { 'puppet-lint':
+    ensure => 'installed',
+  }
+
 }
+
+include tully_linter_requirements
 
 # android studio
 
@@ -80,6 +100,14 @@ package { 'autoconf':
   ensure => 'installed',
 }
 package { 'automake':
+  ensure => 'installed',
+}
+
+package { 'rake':
+  ensure => 'installed',
+}
+
+package { 'ruby-puppetlabs-spec-helper':
   ensure => 'installed',
 }
 
@@ -345,47 +373,8 @@ else {
 
 
 # Basic ROS configuration
-# TODO better parameterization
-# potential parameters:
-#  testing vs main
-#  python3
 
-
-apt::source { 'ros-latest':
-  location   => 'http://packages.ros.org/ros/ubuntu',
-  #release    => 'stable',
-  repos      => 'main',
-  key        => 'B01FA116',
-  key_source => 'https://raw.githubusercontent.com/ros/rosdistro/master/ros.key',
-}
-
-package { 'ros-indigo-ros-base':
-  ensure => 'installed',
-  require => Apt::Source ['ros-latest'],
-}
-
-package { 'python-rosdep':
-  ensure => 'installed',
-  require => Apt::Source ['ros-latest'],
-}
-
-package { 'python-rosinstall':
-  ensure => 'installed',
-  require => Apt::Source ['ros-latest'],
-}
-
-package { 'python-rosdistro':
-  ensure => 'latest',
-  require => Apt::Source ['ros-latest'],
-}
-
-exec {'rosdep-init':
-  command    => '/usr/bin/rosdep init',
-  user       => 'root',
-  creates    => '/etc/ros/rosdep/sources.list.d/20-default.list',
-  require    => Package['python-rosdep'],
-}
-
+include ros
 
 ## ros_release_python
 
