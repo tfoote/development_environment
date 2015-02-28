@@ -36,6 +36,8 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 class ros {
-
+  include ros::params
+  include ros::install
+  include ros::rosdep
 
 }
