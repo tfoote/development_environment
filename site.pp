@@ -309,7 +309,7 @@ package { 'google-chrome-stable':
 
 # Squid-in-a-can
 if hiera('run_squid', false) {
-  docker::image {'tfoote/squid-in-a-can_pr_11':
+  docker::image {'jpetazzo/squid-in-a-can':
     require => Package['docker'],
   }
 
@@ -321,7 +321,7 @@ if hiera('run_squid', false) {
   }
 
   docker::run {'squid-in-a-can_pr_11':
-    image   => 'tfoote/squid-in-a-can_pr_11',
+    image   => 'jpetazzo/squid-in-a-can',
     command => '/tmp/deploy_squid.py',
     env     => ['DISK_CACHE_SIZE=5000', 'MAX_CACHE_OBJECT=1000', 'SQUID_DIRECTIVES=\'
 refresh_pattern . 0 0 1 refresh-ims
@@ -330,7 +330,7 @@ ignore_expect_100 on # needed for new relic system monitor
 \''],
     volumes => ['/var/cache/squid-in-a-can:/var/cache/squid3'],
     net     => 'host',
-    require => [Docker::Image['tfoote/squid-in-a-can_pr_11'],
+    require => [Docker::Image['jpetazzo/squid-in-a-can'],
                 File['/var/cache/squid-in-a-can'],
                ],
   }
