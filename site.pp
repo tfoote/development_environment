@@ -44,11 +44,6 @@ package { 'subversion':
   ensure => 'installed',
 }
 
-package { 'python-rosinstall':
-  ensure  => 'installed',
-  require => Class['ros'],
-}
-
 package { 'python-vcstool':
   ensure  => 'installed',
   require => Class['ros'],
