@@ -1,3 +1,6 @@
+# Basic ROS configuration
+
+include ros
 
 # setup ntp with defaults
 include '::ntp'
@@ -39,6 +42,21 @@ package { 'mercurial':
 }
 package { 'subversion':
   ensure => 'installed',
+}
+
+package { 'python-rosinstall':
+  ensure  => 'installed',
+  require => Class['ros'],
+}
+
+package { 'python-vcstool':
+  ensure  => 'installed',
+  require => Class['ros'],
+}
+
+package { 'python-wstool':
+  ensure  => 'installed',
+  require => Class['ros'],
 }
 
 
@@ -371,10 +389,6 @@ else {
   }
 }
 
-
-# Basic ROS configuration
-
-include ros
 
 ## ros_release_python
 
