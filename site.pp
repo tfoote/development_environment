@@ -188,6 +188,9 @@ package { 'openssh-server':
   ensure => 'installed',
 }
 
+package { 'openvpn':
+  ensure => 'installed',
+}
 
 # Sysadmin tools:
 
