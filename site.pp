@@ -321,6 +321,20 @@ package { 'google-chrome-stable':
   require => Apt::Source ['google-chrome-stable'],
 }
 
+# OSRF Repos
+apt::source { 'gazebo-ppa':
+  location   => 'http://packages.osrfoundation.org/gazebo/ubuntu',
+  #release   => 'stable',
+  repos      => 'main',
+  key        => '9443F10F',
+  key_source    => 'http://packages.osrfoundation.org/gazebo.key',
+  include_src => false,
+}
+
+package { 'libopensplice63':
+  ensure => 'installed',
+  require => Apt::Source['gazebo-ppa'],
+}
 
 
 # Squid-in-a-can
