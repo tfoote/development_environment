@@ -5,6 +5,8 @@ include ros
 # setup ntp with defaults
 include '::ntp'
 
+# to configure upstart scripts
+include upstart
 
 # Latest docker
 class {'docker':
@@ -350,7 +352,7 @@ if hiera('run_squid', false) {
     group  => 'proxy',
   }
 
-  docker::run {'squid-in-a-can_pr_11':
+  docker::run {'squid-in-a-can':
     image   => 'jpetazzo/squid-in-a-can',
     command => '/tmp/deploy_squid.py',
     env     => ['DISK_CACHE_SIZE=5000', 'MAX_CACHE_OBJECT=1000', 'SQUID_DIRECTIVES=\'
@@ -365,19 +367,27 @@ ignore_expect_100 on # needed for new relic system monitor
                ],
   }
 
-  class { 'iptables':
-    config => 'file', # This is needed to activate file mode
-    source => [ "puppet:///modules/local_config_files/etc/iptables.docker_squid"],
-  }
   package { 'squidclient':
     ensure => 'installed',
   }
+
+  file { '/root/manage.py':
+    ensure => present,
+    source => 'puppet:///modules/local_config_files/root/manage.py',
+    mode => 755,
+  }
+
+  upstart::job{'manage-tproxy':
+    description => 'Manage iptables for tproxy',
+    chdir => '/root',
+    exec  => '/root/manage.py',
+    require => File['/root/manage.py'],
+    respawn     => true,
+    respawn_limit => '99 5',
+  }
 }
 else {
-  class { 'iptables':
-    config => 'file', # This is needed to activate file mode
-    source => [ "puppet:///modules/local_config_files/etc/iptables.docker"],
-  }
+
 
 }
 
