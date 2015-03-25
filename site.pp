@@ -118,6 +118,10 @@ package { 'automake':
   ensure => 'installed',
 }
 
+package { 'ccache':
+  ensure => 'installed',
+}
+
 package { 'rake':
   ensure => 'installed',
 }
