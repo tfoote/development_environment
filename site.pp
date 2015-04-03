@@ -22,6 +22,11 @@ pip::install { 'fig':
   require => Package['python-pip'],
 }
 
+# qemu to support docker armhf
+package { 'qemu-user-static':
+  ensure => 'installed',
+}
+
 
 # Standard vcs tools
 package { 'bzr':
