@@ -140,6 +140,11 @@ package { 'gimp':
   ensure => 'installed',
 }
 
+# image processing
+package { 'imagemagick':
+  ensure => 'installed',
+}
+
 #gitbook
 package { 'nodejs':
   ensure => 'installed',
