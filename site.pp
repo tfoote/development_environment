@@ -76,6 +76,16 @@ ensure => 'installed',
 }
 
 
+# Source analysis tools
+package { 'gitstats':
+  ensure => 'installed',
+}
+
+package { 'gource':
+  ensure => 'installed',
+}
+
+
 class tully_linter_requirements {
 
   # atom manually
@@ -190,6 +200,10 @@ package { 'python3-pep8':
   ensure => 'installed',
 }
 
+package { 'python-virtualenv':
+  ensure => 'installed',
+}
+
 package { 'python-flake8':
   ensure => 'installed',
 }
@@ -235,6 +249,10 @@ package { 'vnstat':
 }
 
 package { 'nmap':
+  ensure => 'installed',
+}
+
+package { 'quicksynergy':
   ensure => 'installed',
 }
 
