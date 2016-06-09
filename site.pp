@@ -365,7 +365,7 @@ apt::source { 'gazebo-ppa':
   include_src => false,
 }
 
-package { 'libopensplice63':
+package { 'libopensplice64':
   ensure => 'installed',
   require => Apt::Source['gazebo-ppa'],
 }
