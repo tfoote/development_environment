@@ -17,11 +17,6 @@ class {'docker':
   manage_kernel => false,
 }
 
-pip::install { 'fig':
-  python_version => '2',    # defaults to 2.7
-  require => Package['python-pip'],
-}
-
 # qemu to support docker armhf
 package { 'qemu-user-static':
   ensure => 'installed',
@@ -78,6 +73,14 @@ ensure => 'installed',
 
 # Source analysis tools
 package { 'gitstats':
+  ensure => 'installed',
+}
+
+package { 'cloc':
+  ensure => 'installed',
+}
+
+package { 'sloccount':
   ensure => 'installed',
 }
 
@@ -149,8 +152,9 @@ package { 'ruby-puppetlabs-spec-helper':
 package { 'gimp':
   ensure => 'installed',
 }
-
-# image processing
+package { 'inkscape':
+  ensure => 'installed',
+}
 package { 'imagemagick':
   ensure => 'installed',
 }
@@ -236,6 +240,10 @@ package { 'sysstat':
   ensure => 'installed',
 }
 
+package { 'htop':
+  ensure => 'installed',
+}
+
 package { 'iftop':
   ensure => 'installed',
 }
@@ -284,6 +292,9 @@ package { 'latex-beamer':
   ensure => 'installed',
 }
 
+package { 'mumble':
+  ensure => 'installed',
+}
 
 
 # Needed for rosdistro tests
@@ -293,10 +304,10 @@ package { 'latex-beamer':
 #  ensure => 'installed',
 #}
 
-pip::install { 'unidiff':
-  python_version => '2',    # defaults to 2.7
-  require => Package['python-pip'],
-}
+# commented not working on xenial TODO reenable
+#pip::install { 'unidiff':
+#  require => Package['python-pip'],
+#}
 
 # buildfarm deployment
 
@@ -327,18 +338,18 @@ package { 'android-tools-adb':
 
 # Pandora
 
-apt::source { 'pithos-ppa':
-  location   => 'http://ppa.launchpad.net/pithos/ppa/ubuntu',
-  #release    => 'stable',
-  repos      => 'main',
-  key        => '5C8B1281',
-  #include_src => false,
-}
+#apt::source { 'pithos-ppa':
+#  location   => 'http://ppa.launchpad.net/pithos/ppa/ubuntu',
+#  #release    => 'stable',
+#  repos      => 'main',
+#  key        => '5C8B1281',
+#  #include_src => false,
+#}
 
-package { 'pithos':
-  ensure => 'installed',
-  require => Apt::Source['pithos-ppa'],
-}
+#package { 'pithos':
+#  ensure => 'installed',
+#  require => Apt::Source['pithos-ppa'],
+#}
 
 
 
@@ -365,10 +376,6 @@ apt::source { 'gazebo-ppa':
   include_src => false,
 }
 
-package { 'libopensplice64':
-  ensure => 'installed',
-  require => Apt::Source['gazebo-ppa'],
-}
 
 
 # Squid-in-a-can
@@ -486,6 +493,12 @@ package { 'python-pip':
 package { 'python3-pip':
   ensure => 'latest',
 }
+
+package { 'indicator-multiload':
+  ensure => 'latest',
+}
+
+
 
 ## TODO
 # apt-file update
