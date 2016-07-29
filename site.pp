@@ -204,6 +204,10 @@ package { 'python3-pep8':
   ensure => 'installed',
 }
 
+package { 'python3-venv':
+  ensure => 'installed',
+}
+
 package { 'python-virtualenv':
   ensure => 'installed',
 }
