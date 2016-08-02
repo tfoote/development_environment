@@ -1,5 +1,6 @@
 forge "https://forgeapi.puppetlabs.com"
 
+mod 'camptocamp-systemd'
 mod 'garethr-docker'
 mod 'maestrodev-android'
 mod 'puppetlabs-ntp'

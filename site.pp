@@ -5,8 +5,8 @@ include ros
 # setup ntp with defaults
 include '::ntp'
 
-# to configure upstart scripts
-include upstart
+# # to configure upstart scripts
+# include upstart
 
 # Latest docker
 class {'docker':
@@ -402,21 +402,29 @@ if hiera('run_squid', false) {
     group  => 'proxy',
   }
 
-  docker::run {'squid-in-a-can':
-    image   => 'jpetazzo/squid-in-a-can',
-    command => '/tmp/deploy_squid.py',
-    env     => ['DISK_CACHE_SIZE=5000', 'MAX_CACHE_OBJECT=1000', 'SQUID_DIRECTIVES=\'
-refresh_pattern . 0 0 1 refresh-ims
-refresh_all_ims on # make sure we do not get out of date content
-ignore_expect_100 on # needed for new relic system monitor
-\''],
-    volumes => ['/var/cache/squid-in-a-can:/var/cache/squid3',
-                '/var/log/squid-in-a-can:/var/log/squid3'],
-    net     => 'host',
-    require => [Docker::Image['jpetazzo/squid-in-a-can'],
-                File['/var/cache/squid-in-a-can'],
-                File['/var/log/squid-in-a-can'],
-               ],
+#   docker::run {'squid-in-a-can':
+#     image   => 'jpetazzo/squid-in-a-can',
+#     command => '/tmp/deploy_squid.py',
+#     env     => ['DISK_CACHE_SIZE=5000', 'MAX_CACHE_OBJECT=1000', 'SQUID_DIRECTIVES=\'
+# refresh_pattern . 0 0 1 refresh-ims
+# refresh_all_ims on # make sure we do not get out of date content
+# ignore_expect_100 on # needed for new relic system monitor
+# \''],
+#     volumes => ['/var/cache/squid-in-a-can:/var/cache/squid3',
+#                 '/var/log/squid-in-a-can:/var/log/squid3'],
+#     net     => 'host',
+#     require => [Docker::Image['jpetazzo/squid-in-a-can'],
+#                 File['/var/cache/squid-in-a-can'],
+#                 File['/var/log/squid-in-a-can'],
+#                ],
+#   }
+
+  ::systemd::unit_file { 'squid-in-a-can.service':
+  source => "puppet:///modules/local_config_files/etc/systemd/squid-in-a-can.conf",
+  require => [Docker::Image['jpetazzo/squid-in-a-can'],
+              File['/var/cache/squid-in-a-can'],
+              File['/var/log/squid-in-a-can'],
+              ],
   }
 
   package { 'squidclient':
@@ -429,14 +437,14 @@ ignore_expect_100 on # needed for new relic system monitor
     mode => 755,
   }
 
-  upstart::job{'manage-tproxy':
-    description => 'Manage iptables for tproxy',
-    chdir => '/root',
-    exec  => '/root/manage.py',
-    require => File['/root/manage.py'],
-    respawn     => true,
-    respawn_limit => '99 5',
-  }
+  # upstart::job{'manage-tproxy':
+  #   description => 'Manage iptables for tproxy',
+  #   chdir => '/root',
+  #   exec  => '/root/manage.py',
+  #   require => File['/root/manage.py'],
+  #   respawn     => true,
+  #   respawn_limit => '99 5',
+  # }
 }
 else {
 
