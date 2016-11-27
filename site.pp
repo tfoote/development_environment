@@ -172,9 +172,9 @@ package { 'npm':
 
 
 # steam
-package { 'steam':
-  ensure => 'installed',
-}
+# package { 'steam':
+#  ensure => 'installed',
+#}
 
 
 # Wine
